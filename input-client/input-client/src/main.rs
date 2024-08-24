@@ -92,10 +92,7 @@ async fn send_batch_to_server(
         })).collect::<Vec<_>>()
     });
 
-    #[cfg(debug_assertions)]
-    let endpoint = format!("http://{}/ingest", config.server_ip);
-    #[cfg(not(debug_assertions))]
-    let endpoint = format!("https://{}/ingest", config.server_ip);
+    let endpoint = format!("{}/ingest", config.server_ip);
 
     let response = client
         .post(&endpoint)

@@ -1,5 +1,5 @@
 use axum::{
-    routing::post,
+    routing::{post, get},
     Router,
     Json,
     http::StatusCode,
@@ -55,6 +55,7 @@ async fn main() {
     };
 
     let app = Router::new()
+        .route("/", get(index))
         .route("/ingest", post(ingest_events))
         .with_state(state);
 
@@ -64,6 +65,10 @@ async fn main() {
 
     tracing::info!("listening on {}", actual_addr);
     axum::serve(listener, app).await.unwrap();
+}
+
+async fn index() -> String {
+    return "Hello World :D".to_string(); 
 }
 
 async fn ingest_events(
