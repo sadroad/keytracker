@@ -1,0 +1,3 @@
+[workspace]
+resolver = "2"
+members = ["xtask", "input-client", "input-client-common"]
